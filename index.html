@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>homework10</title>
+</head>
+<body>
+	<style>
+		table td {
+			padding: 20px;
+			border: 1px solid black; 
+		}
+	</style>
+
+<div class="forList"></div>
+<div class="forTable"></div>
+
+<script>
+
+let arr = [1, 2, ["3.1", "3.2", "3.3"], 4]; 	
+
+	function generateList (arr) {
+		let newUl = document.createElement("ul");
+		let list ="";
+
+		for (let i = 0; i < arr.length; i++) {
+			if (Array.isArray(arr[i]) === false) {
+				newUl.innerHTML = "<li>" + arr[i];
+				list += newUl.innerHTML;
+			} else {
+				let innerUl = document.createElement("ul");
+				let innerList = "<li><ul>";
+				for (let j = 0; j < arr[i].length; j++) {
+					innerUl.innerHTML = "<li>" + arr[i][j];
+					innerList += innerUl.innerHTML;
+				}
+				list = list + innerList + "</ul></li>";
+			}	
+		}
+		return list;
+	}
+let thatDiv = document.querySelector(".forList");
+thatDiv.innerHTML = generateList(arr);
+
+
+
+function createTable (rows, cols){
+let table = document.createElement("table");
+let counter = 1;
+	for (var i = 0; i < rows; i++) {
+		let tr = document.createElement("tr");
+		
+		for (var j = 1; j <= cols; j++) {
+			let td = document.createElement("td");
+			var num = document.createTextNode(counter);
+  			td.appendChild(num);
+			tr.appendChild(td);
+			counter++;
+		}
+		table.appendChild(tr);
+	}
+	return table;
+}
+let thisDiv = document.querySelector(".forTable");
+thisDiv.appendChild(createTable(10, 10));
+
+</script>
+
+</body>
+</html>
